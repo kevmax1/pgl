@@ -6,60 +6,6 @@
           <li class="divider">Menu</li>
           <li class="active"><a href="index.html"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
           </li>
-          <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>UI Elements</span></a>
-            <ul class="sub-menu">
-              <li><a href="ui-alerts.html">Alerts</a>
-              </li>
-              <li><a href="ui-buttons.html">Buttons</a>
-              </li>
-              <li><a href="ui-panels.html">Panels</a>
-              </li>
-              <li><a href="ui-general.html">General</a>
-              </li>
-              <li><a href="ui-modals.html">Modals</a>
-              </li>
-              <li><a href="ui-notifications.html">Notifications</a>
-              </li>
-              <li><a href="ui-icons.html">Icons</a>
-              </li>
-              <li><a href="ui-grid.html">Grid</a>
-              </li>
-              <li><a href="ui-tabs-accordions.html">Tabs &amp; Accordions</a>
-              </li>
-              <li><a href="ui-nestable-lists.html">Nestable Lists</a>
-              </li>
-              <li><a href="ui-typography.html"><span class="label label-primary pull-right">New</span>Typography</a>
-              </li>
-            </ul>
-          </li>
-          <li class="parent"><a href="charts.html"><i class="icon mdi mdi-chart-donut"></i><span>Charts</span></a>
-            <ul class="sub-menu">
-              <li><a href="charts-flot.html">Flot</a>
-              </li>
-              <li><a href="charts-sparkline.html">Sparklines</a>
-              </li>
-              <li><a href="charts-chartjs.html">Chart.js</a>
-              </li>
-              <li><a href="charts-morris.html">Morris.js</a>
-              </li>
-            </ul>
-          </li>
-          <li class="parent"><a href="#"><i class="icon mdi mdi-dot-circle"></i><span>Forms</span></a>
-            <ul class="sub-menu">
-              <li><a href="form-elements.html">Elements</a>
-              </li>
-              <li><a href="form-validation.html">Validation</a>
-              </li>
-              <li><a href="form-wizard.html">Wizard</a>
-              </li>
-              <li><a href="form-masks.html">Input Masks</a>
-              </li>
-              <li><a href="form-wysiwyg.html">WYSIWYG Editor</a>
-              </li>
-              <li><a href="form-upload.html">Multi Upload</a>
-              </li>
-            </ul>
-          </li>
           <li class="parent"><a href="#"><i class="icon mdi mdi-border-all"></i><span>Tables</span></a>
             <ul class="sub-menu">
               <li><a href="tables-general.html">General</a>

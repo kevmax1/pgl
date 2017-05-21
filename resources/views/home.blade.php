@@ -25,6 +25,9 @@
         <div class="panel-heading">Dashboard</div>
         <div class="panel-body">
             You are logged in!
+            <pre>
+            {{ print_r(Session::get('current_module'))}}
+            </pre>
         </div>
     </div>
 @endsection
