@@ -21,7 +21,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="be-wrapper be-fixed-sidebar">
+      <div class="be-wrapper be-fixed-sidebar {{ Session::has('current_module') ?  Session::get('current_module')->couleur : ''}}">
         <nav class="navbar navbar-default navbar-fixed-top be-top-header">
           @include('layouts.partials.top-header')
         </nav>

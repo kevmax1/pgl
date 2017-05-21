@@ -6,89 +6,31 @@
           <li class="divider">Menu</li>
           <li class="active"><a href="index.html"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
           </li>
-          <li class="parent"><a href="#"><i class="icon mdi mdi-border-all"></i><span>Tables</span></a>
-            <ul class="sub-menu">
-              <li><a href="tables-general.html">General</a>
+          @foreach(myModuleAccess() as $access)
+          @if( $access->menu->parent_id == 0 )
+              <li class="parent" >
+                  <a href="{{ $access->menu->route }}">
+                      <i class="{{ $access->menu->icon }}"></i>
+                      <span>{{ $access->menu->libelle }}</span>
+                      <span class="fa arrow"></span>
+                  </a>
+                  @if( count($access->menu->fils()) > 0 )
+                  <ul class="sub-menu" >
+                      @foreach(myModuleAccess() as $as)
+                      @if($as->menu->parent_id == $access->menu->id)
+                          <li>
+                              <a href="{{$as->menu->route}}">
+                                  <i class="fa fa-angle-right"></i>
+                                  &nbsp; {{$as->menu->libelle}} 
+                              </a>
+                          </li>
+                      @endif
+                      @endforeach
+                  </ul>
+                  @endif
               </li>
-              <li><a href="tables-datatables.html">Data Tables</a>
-              </li>
-            </ul>
-          </li>
-          <li class="parent"><a href="#"><i class="icon mdi mdi-layers"></i><span>Pages</span></a>
-            <ul class="sub-menu">
-              <li><a href="pages-blank.html">Blank Page</a>
-              </li>
-              <li ><a href="pages-blank-header.html">Blank Page Header</a>
-              </li>
-              <li><a href="pages-login.html">Login</a>
-              </li>
-              <li><a href="pages-login2.html">Login v2</a>
-              </li>
-              <li><a href="pages-404.html">404 Page</a>
-              </li>
-              <li><a href="pages-sign-up.html">Sign Up</a>
-              </li>
-              <li><a href="pages-forgot-password.html">Forgot Password</a>
-              </li>
-              <li><a href="pages-profile.html">Profile</a>
-              </li>
-              <li><a href="pages-pricing-tables.html">Pricing Tables</a>
-              </li>
-              <li><a href="pages-pricing-tables2.html">Pricing Tables v2</a>
-              </li>
-              <li><a href="pages-timeline.html"><span class="label label-primary pull-right">New</span>Timeline</a>
-              </li>
-              <li><a href="pages-timeline2.html"><span class="label label-primary pull-right">New</span>Timeline v2</a>
-              </li>
-              <li><a href="pages-invoice.html"><span class="label label-primary pull-right">New</span>Invoice</a>
-              </li>
-              <li><a href="pages-calendar.html">Calendar</a>
-              </li>
-              <li><a href="pages-gallery.html">Gallery</a>
-              </li>
-            </ul>
-          </li>
-          <li class="divider">Features</li>
-          <li class="parent"><a href="#"><i class="icon mdi mdi-inbox"></i><span>Email</span></a>
-            <ul class="sub-menu">
-              <li><a href="email-inbox.html">Inbox</a>
-              </li>
-              <li><a href="email-read.html">Email Detail</a>
-              </li>
-              <li><a href="email-compose.html">Email Compose</a>
-              </li>
-            </ul>
-          </li>
-          <li class="parent"><a href="#"><i class="icon mdi mdi-view-web"></i><span>Layouts</span></a>
-            <ul class="sub-menu">
-              <li><a href="layouts-primary-header.html">Primary Header</a>
-              </li>
-              <li><a href="layouts-success-header.html">Success Header</a>
-              </li>
-              <li><a href="layouts-warning-header.html">Warning Header</a>
-              </li>
-              <li><a href="layouts-danger-header.html">Danger Header</a>
-              </li>
-              <li><a href="layouts-nosidebar-left.html">Without Left Sidebar</a>
-              </li>
-              <li><a href="layouts-nosidebar-right.html">Without Right Sidebar</a>
-              </li>
-              <li><a href="layouts-nosidebars.html">Without Both Sidebars</a>
-              </li>
-              <li><a href="layouts-fixed-sidebar.html">Fixed Left Sidebar</a>
-              </li>
-              <li><a href="pages-blank-aside.html">Page Aside</a>
-              </li>
-            </ul>
-          </li>
-          <li class="parent"><a href="#"><i class="icon mdi mdi-pin"></i><span>Maps</span></a>
-            <ul class="sub-menu">
-              <li><a href="maps-google.html">Google Maps</a>
-              </li>
-              <li><a href="maps-vector.html">Vector Maps</a>
-              </li>
-            </ul>
-          </li>
+          @endif
+          @endforeach
         </ul>
       </div>
     </div>

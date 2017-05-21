@@ -44,5 +44,6 @@ class LoginController extends Controller
     {
         $modules = module::all();
         $request->session()->put('modules',$modules->toArray());
+        $request->session()->put('current_module',module::find(1));
     }
 }
