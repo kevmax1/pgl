@@ -20,24 +20,26 @@
     @yield('custom_css')
   </head>
   <body>
-    <div class="be-wrapper be-fixed-sidebar">
-      <nav class="navbar navbar-default navbar-fixed-top be-top-header">
-        @include('layouts.partials.top-header')
-      </nav>
-      <div class="be-left-sidebar">
-        @include('layouts.partials.left-sidebar')
-      </div>
-      <div class="be-content">
-        <div class="page-head">
-          @yield('page-head')
+    <div id="app">
+      <div class="be-wrapper be-fixed-sidebar">
+        <nav class="navbar navbar-default navbar-fixed-top be-top-header">
+          @include('layouts.partials.top-header')
+        </nav>
+        <div class="be-left-sidebar">
+          @include('layouts.partials.left-sidebar')
         </div>
-        <div class="main-content container-fluid">
-          @yield('content')
+        <div class="be-content">
+          <div class="page-head">
+            @yield('page-head')
+          </div>
+          <div class="main-content container-fluid">
+            @yield('content')
+          </div>
         </div>
+        <nav class="be-right-sidebar">
+          @include('layouts.partials.right-sidebar')
+        </nav>
       </div>
-      <nav class="be-right-sidebar">
-        @include('layouts.partials.right-sidebar')
-      </nav>
     </div>
     <script src="/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>

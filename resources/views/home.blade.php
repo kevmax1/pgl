@@ -5,7 +5,6 @@
 @endsection
 
 @section('custom_js')
-    <script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer></script>
 @endsection
 
 @section('page-title')
