@@ -36,7 +36,7 @@ if (!function_exists('myModuleAccess')) {
 }
 if (!function_exists('hasAccess')) {
     function hasAccess($route){
-    	dd(menu::where('route', $route)->get());
+    	dd(request(), menu::where('route', $route)->get());
     	return Auth::user()->role->access;
     }
 }

@@ -26,7 +26,7 @@
         <div class="panel-body">
             You are logged in!
             <pre>
-            {{ print_r( myModuleAccess('/anneeAcademiques/create') )}}
+            {{ print_r( hasAccess('/anneeAcademiques/create') )}}
             </pre>
         </div>
     </div>
