@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="navbar-header"><a href="index.html" class="navbar-brand"></a></div>
+  <div class="navbar-header"><a href="{{url('/')}}" class="navbar-brand"></a></div>
   <div class="be-right-navbar">
     @include('layouts.partials.top-items.user-nav')
     <div class="page-title"><span>@yield('page-title')</span></div>

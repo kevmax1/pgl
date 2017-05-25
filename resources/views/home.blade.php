@@ -5,7 +5,6 @@
 @endsection
 
 @section('custom_js')
-    <script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer></script>
 @endsection
 
 @section('page-title')
@@ -22,12 +21,13 @@
 @endsection
 
 @section('content')
-<div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">Dashboard</div>
         <div class="panel-body">
             You are logged in!
+            <pre>
+            {{ print_r( hasAccess('/anneeAcademiques/create') )}}
+            </pre>
         </div>
     </div>
-</div>
 @endsection

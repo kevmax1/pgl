@@ -26,9 +26,8 @@ Route::group(['middleware' => ['auth']], function(){
 	});
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::resource('roles', 'roleController');
-	
-	Route::resource('modules', 'moduleController');
 
+    Route::get('modules/{id}','moduleController@set')->name('modules.set');
 	Route::resource('menus', 'menuController');
 });
 

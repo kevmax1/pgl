@@ -19,7 +19,10 @@
 <!-- Encours Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('encours', 'Encours:') !!}
-
+	<div>
+		<input type="radio" name="encours" value="1">True
+		<input type="radio" name="encours" value="0">Fase
+	</div>
 </div>
 
 <!-- Submit Field -->

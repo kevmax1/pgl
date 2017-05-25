@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Models\menu;
 /**
  * Class menu
  * @package App\Models
@@ -50,13 +50,20 @@ class menu extends Model
      * @var array
      */
     public static $rules = [
-        'libelle' => 'required',
-        'libelle_en' => 'required',
+        'libelle' => 'required|unique:menus',
+        'libelle_en' => 'required|unique:menus',
         'parent_id' => 'required',
         'route' => 'required',
         'route_name' => 'required',
         'module_id' => 'required'
     ];
 
-    
+    public function module(){
+        return $this->belongsTo('App\Models\module');
+    }
+
+    public function fils(){
+        return menu::where('parent_id', $this->id)->get();
+    }
+
 }
