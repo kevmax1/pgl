@@ -32,7 +32,7 @@ class AnneeAcademiqueController extends AppBaseController
         $this->anneeAcademiqueRepository->pushCriteria(new RequestCriteria($request));
         $anneeAcademiques = $this->anneeAcademiqueRepository->all();
 
-        return view('annee_academiques.index')
+        return view('modules.principal.annee_academiques.index')
             ->with('anneeAcademiques', $anneeAcademiques);
     }
 
@@ -43,7 +43,7 @@ class AnneeAcademiqueController extends AppBaseController
      */
     public function create()
     {
-        return view('annee_academiques.create');
+        return view('modules.principal.annee_academiques.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class AnneeAcademiqueController extends AppBaseController
             return redirect(route('anneeAcademiques.index'));
         }
 
-        return view('annee_academiques.show')->with('anneeAcademique', $anneeAcademique);
+        return view('modules.principal.annee_academiques.show')->with('anneeAcademique', $anneeAcademique);
     }
 
     /**
@@ -101,7 +101,7 @@ class AnneeAcademiqueController extends AppBaseController
             return redirect(route('anneeAcademiques.index'));
         }
 
-        return view('annee_academiques.edit')->with('anneeAcademique', $anneeAcademique);
+        return view('modules.principal.annee_academiques.edit')->with('anneeAcademique', $anneeAcademique);
     }
 
     /**

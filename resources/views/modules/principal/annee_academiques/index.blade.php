@@ -15,7 +15,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('annee_academiques.table')
+                @include('modules.principal.annee_academiques.table')
             </div>
         </div>
     </div>

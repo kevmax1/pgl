@@ -14,7 +14,7 @@
                 <div class="row">
                     {!! Form::open(['route' => 'anneeAcademiques.store']) !!}
 
-                        @include('annee_academiques.fields')
+                        @include('modules.principal.annee_academiques.fields')
 
                     {!! Form::close() !!}
                 </div>

@@ -13,7 +13,7 @@
                <div class="row">
                    {!! Form::model($anneeAcademique, ['route' => ['anneeAcademiques.update', $anneeAcademique->id], 'method' => 'patch']) !!}
 
-                        @include('annee_academiques.fields')
+                        @include('modules.principal.annee_academiques.fields')
 
                    {!! Form::close() !!}
                </div>
