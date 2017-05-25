@@ -13,7 +13,7 @@
                <div class="row">
                    {!! Form::model($composition, ['route' => ['compositions.update', $composition->id], 'method' => 'patch']) !!}
 
-                        @include('compositions.fields')
+                        @include('modules.principal.compositions.fields')
 
                    {!! Form::close() !!}
                </div>

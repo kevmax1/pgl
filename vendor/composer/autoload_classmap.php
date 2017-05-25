@@ -621,6 +621,7 @@ return array(
     'Dotenv\\Exception\\ValidationException' => $vendorDir . '/vlucas/phpdotenv/src/Exception/ValidationException.php',
     'Dotenv\\Loader' => $vendorDir . '/vlucas/phpdotenv/src/Loader.php',
     'Dotenv\\Validator' => $vendorDir . '/vlucas/phpdotenv/src/Validator.php',
+    'EditMenusTable' => $baseDir . '/database/migrations/2017_05_21_213308_edit_menus_table.php',
     'EditUsersTable' => $baseDir . '/database/migrations/2017_05_18_100902_edit_users_table.php',
     'Faker\\Calculator\\Iban' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
     'Faker\\Calculator\\Luhn' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
