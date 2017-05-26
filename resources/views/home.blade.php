@@ -25,9 +25,6 @@
         <div class="panel-heading">Dashboard</div>
         <div class="panel-body">
             You are logged in!
-            <pre>
-            {{ print_r( hasAccess('/anneeAcademiques/create') )}}
-            </pre>
         </div>
     </div>
 @endsection
