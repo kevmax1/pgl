@@ -64,7 +64,7 @@ Route::resource('sections', 'sectionController');
 
 Route::resource('cycles', 'CycleController');
 
-Route::resource('nivaus', 'NivauController');
+Route::resource('niveaux', 'NivauController');
 
 Route::resource('series', 'SerieController');
 
