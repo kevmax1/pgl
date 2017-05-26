@@ -6,6 +6,14 @@
           <li class="divider">Menu</li>
           <li class="active"><a href="index.html"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
           </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-group"></i><span>Section</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('sections.index') }}">Liste des sections</a>
+                    </li>
+                    <li><a href="{{ route('sections.create') }}">Ajouter une section</a>
+                    </li>
+                </ul>
+            </li>
           @foreach(myModuleAccess() as $access)
           @if( $access->menu->parent_id == 0 )
               <li class="parent" >

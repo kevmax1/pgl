@@ -32,7 +32,7 @@ class sectionController extends AppBaseController
         $this->sectionRepository->pushCriteria(new RequestCriteria($request));
         $sections = $this->sectionRepository->all();
 
-        return view('sections.index')
+        return view('modules.principal.sections.index')
             ->with('sections', $sections);
     }
 
@@ -43,7 +43,7 @@ class sectionController extends AppBaseController
      */
     public function create()
     {
-        return view('sections.create');
+        return view('modules.principal.sections.create');
     }
 
     /**
@@ -101,7 +101,7 @@ class sectionController extends AppBaseController
             return redirect(route('sections.index'));
         }
 
-        return view('sections.edit')->with('section', $section);
+        return view('modules.principal.sections.edit')->with('section', $section);
     }
 
     /**
