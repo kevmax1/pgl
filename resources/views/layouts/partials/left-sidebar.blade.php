@@ -6,6 +6,38 @@
           <li class="divider">Menu</li>
           <li class="active"><a href="index.html"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
           </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-group"></i><span>Sections</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('sections.index') }}">Liste des sections</a>
+                    </li>
+                    <li><a href="{{ route('sections.create') }}">Ajouter une section</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-rotate-right"></i><span>Cycles</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('cycles.index') }}">Liste des cycles</a>
+                    </li>
+                    <li><a href="{{ route('cycles.create') }}">Ajouter un cycle</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-layers"></i><span>Niveaux</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('niveaux.index') }}">Liste des niveaux</a>
+                    </li>
+                    <li><a href="{{ route('niveaux.create') }}">Ajouter un niveau</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-filter-list"></i><span>Series</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('series.index') }}">Liste des series</a>
+                    </li>
+                    <li><a href="{{ route('series.create') }}">Ajouter une serie</a>
+                    </li>
+                </ul>
+            </li>
           @foreach(myModuleAccess() as $access)
           @if( $access->menu->parent_id == 0 )
               <li class="parent" >

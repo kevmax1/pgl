@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateNivauRequest;
 use App\Http\Requests\UpdateNivauRequest;
+use App\Models\Cycle;
+use App\Models\section;
 use App\Repositories\NivauRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -32,7 +34,7 @@ class NivauController extends AppBaseController
         $this->nivauRepository->pushCriteria(new RequestCriteria($request));
         $nivaus = $this->nivauRepository->all();
 
-        return view('nivaus.index')
+        return view('modules.principal.nivaus.index')
             ->with('nivaus', $nivaus);
     }
 
@@ -43,7 +45,9 @@ class NivauController extends AppBaseController
      */
     public function create()
     {
-        return view('nivaus.create');
+        $sections = section::all();
+        $cycles = Cycle::all();
+        return view('modules.principal.nivaus.create',compact('sections','cycles'));
     }
 
     /**
@@ -61,7 +65,7 @@ class NivauController extends AppBaseController
 
         Flash::success('Nivau saved successfully.');
 
-        return redirect(route('nivaus.index'));
+        return redirect(route('niveaux.index'));
     }
 
     /**
@@ -78,10 +82,10 @@ class NivauController extends AppBaseController
         if (empty($nivau)) {
             Flash::error('Nivau not found');
 
-            return redirect(route('nivaus.index'));
+            return redirect(route('niveaux.index'));
         }
 
-        return view('nivaus.show')->with('nivau', $nivau);
+        return view('modules.principal.nivaus.show')->with('nivau', $nivau);
     }
 
     /**
@@ -98,10 +102,12 @@ class NivauController extends AppBaseController
         if (empty($nivau)) {
             Flash::error('Nivau not found');
 
-            return redirect(route('nivaus.index'));
+            return redirect(route('niveaux.index'));
         }
+        $sections = section::all();
+        $cycles = Cycle::all();
 
-        return view('nivaus.edit')->with('nivau', $nivau);
+        return view('modules.principal.nivaus.edit',compact('sections','cycles'))->with('nivau', $nivau);
     }
 
     /**
@@ -119,14 +125,14 @@ class NivauController extends AppBaseController
         if (empty($nivau)) {
             Flash::error('Nivau not found');
 
-            return redirect(route('nivaus.index'));
+            return redirect(route('niveaux.index'));
         }
 
         $nivau = $this->nivauRepository->update($request->all(), $id);
 
         Flash::success('Nivau updated successfully.');
 
-        return redirect(route('nivaus.index'));
+        return redirect(route('niveaux.index'));
     }
 
     /**
@@ -143,13 +149,13 @@ class NivauController extends AppBaseController
         if (empty($nivau)) {
             Flash::error('Nivau not found');
 
-            return redirect(route('nivaus.index'));
+            return redirect(route('niveaux.index'));
         }
 
         $this->nivauRepository->delete($id);
 
         Flash::success('Nivau deleted successfully.');
 
-        return redirect(route('nivaus.index'));
+        return redirect(route('niveaux.index'));
     }
 }
