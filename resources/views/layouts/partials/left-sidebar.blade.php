@@ -30,6 +30,14 @@
                     </li>
                 </ul>
             </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-filter-list"></i><span>Series</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('series.index') }}">Liste des series</a>
+                    </li>
+                    <li><a href="{{ route('series.create') }}">Ajouter une serie</a>
+                    </li>
+                </ul>
+            </li>
           @foreach(myModuleAccess() as $access)
           @if( $access->menu->parent_id == 0 )
               <li class="parent" >

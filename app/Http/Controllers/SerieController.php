@@ -32,7 +32,7 @@ class SerieController extends AppBaseController
         $this->serieRepository->pushCriteria(new RequestCriteria($request));
         $series = $this->serieRepository->all();
 
-        return view('series.index')
+        return view('modules.principal.series.index')
             ->with('series', $series);
     }
 
@@ -43,7 +43,7 @@ class SerieController extends AppBaseController
      */
     public function create()
     {
-        return view('series.create');
+        return view('modules.principal.series.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class SerieController extends AppBaseController
             return redirect(route('series.index'));
         }
 
-        return view('series.show')->with('serie', $serie);
+        return view('modules.principal.series.show')->with('serie', $serie);
     }
 
     /**
@@ -101,7 +101,7 @@ class SerieController extends AppBaseController
             return redirect(route('series.index'));
         }
 
-        return view('series.edit')->with('serie', $serie);
+        return view('modules.principal.series.edit')->with('serie', $serie);
     }
 
     /**
