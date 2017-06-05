@@ -14,7 +14,7 @@
                 <div class="row">
                     {!! Form::open(['route' => 'series.store']) !!}
 
-                        @include('series.fields')
+                        @include('modules.principal.series.fields')
 
                     {!! Form::close() !!}
                 </div>

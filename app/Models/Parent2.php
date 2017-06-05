@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version May 20, 2017, 1:14 am UTC
  */
-class Parent extends Model
+class Parent2 extends Model
 {
     use SoftDeletes;
 

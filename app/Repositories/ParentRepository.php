@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Parent;
+use App\Models\Parent2;
 use InfyOm\Generator\Common\BaseRepository;
 
 class ParentRepository extends BaseRepository
@@ -23,6 +23,6 @@ class ParentRepository extends BaseRepository
      **/
     public function model()
     {
-        return Parent::class;
+        return Parent2::class;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCycleRequest;
 use App\Http\Requests\UpdateCycleRequest;
+use App\Models\section;
 use App\Repositories\CycleRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class CycleController extends AppBaseController
         $this->cycleRepository->pushCriteria(new RequestCriteria($request));
         $cycles = $this->cycleRepository->all();
 
-        return view('cycles.index')
+        return view('modules.principal.cycles.index')
             ->with('cycles', $cycles);
     }
 
@@ -43,7 +44,11 @@ class CycleController extends AppBaseController
      */
     public function create()
     {
-        return view('cycles.create');
+        $sections = section::all('id','libelle_fr');
+        foreach ($sections as $section){
+            $optionSelect[$section->id] = $section->libelle_fr;
+        }
+        return view('modules.principal.cycles.create')->with('section',$optionSelect);
     }
 
     /**
@@ -97,11 +102,13 @@ class CycleController extends AppBaseController
 
         if (empty($cycle)) {
             Flash::error('Cycle not found');
-
             return redirect(route('cycles.index'));
         }
-
-        return view('cycles.edit')->with('cycle', $cycle);
+        $sections = section::all('id','libelle_fr');
+        foreach ($sections as $section){
+            $optionSelect[$section->id] = $section->libelle_fr;
+        }
+        return view('modules.principal.cycles.edit')->with('cycle', $cycle)->with('section',$optionSelect);
     }
 
     /**
