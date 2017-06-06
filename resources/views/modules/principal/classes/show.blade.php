@@ -10,7 +10,7 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
-                    @include('classes.show_fields')
+                    @include('modules.principal.classes.show_fields')
                     <a href="{!! route('classes.index') !!}" class="btn btn-default">Back</a>
                 </div>
             </div>

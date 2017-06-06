@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateClasseRequest;
 use App\Http\Requests\UpdateClasseRequest;
+use App\Models\Classe;
+use App\Models\Cycle;
+use App\Models\Nivau;
+use App\Models\section;
+use App\Models\Serie;
 use App\Repositories\ClasseRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -31,8 +36,20 @@ class ClasseController extends AppBaseController
     {
         $this->classeRepository->pushCriteria(new RequestCriteria($request));
         $classes = $this->classeRepository->all();
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        $series = Serie::all();
+        return view('modules.principal.classes.index',compact('sections','cycles','niveaux','series'))
+            ->with('classes', $classes);
+    }
 
-        return view('classes.index')
+
+
+    public function find($id=0)
+    {
+        $classes = Classe::where('serie_id',$id)->get();
+        return view('modules.principal.classes.table')
             ->with('classes', $classes);
     }
 
@@ -43,7 +60,11 @@ class ClasseController extends AppBaseController
      */
     public function create()
     {
-        return view('classes.create');
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        $series = Serie::all();
+        return view('modules.principal.classes.create',compact('sections','cycles','niveaux','series'));
     }
 
     /**
@@ -81,7 +102,7 @@ class ClasseController extends AppBaseController
             return redirect(route('classes.index'));
         }
 
-        return view('classes.show')->with('classe', $classe);
+        return view('modules.principal.classes.show')->with('classe', $classe);
     }
 
     /**
@@ -100,8 +121,11 @@ class ClasseController extends AppBaseController
 
             return redirect(route('classes.index'));
         }
-
-        return view('classes.edit')->with('classe', $classe);
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        $series = Serie::all();
+        return view('modules.principal.classes.edit',compact('sections','cycles','niveaux','series'))->with('classe', $classe);
     }
 
     /**

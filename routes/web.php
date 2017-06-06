@@ -67,6 +67,8 @@ Route::resource('cycles', 'CycleController');
 Route::resource('niveaux', 'NivauController');
 
 Route::resource('series', 'SerieController');
+Route::get('series/find','SerieController@find')->name('series.find');
+Route::get('series/find/{id}','SerieController@find')->name('series.find2');
 
 Route::resource('programmes', 'ProgrammeController');
 
@@ -79,6 +81,9 @@ Route::resource('anneeAcademiques', 'AnneeAcademiqueController');
 
 
 Route::resource('classes', 'ClasseController');
+
+Route::get('classes/find','ClasseController@find')->name('classes.find');
+Route::get('classes/find/{id}','ClasseController@find')->name('classes.find2');
 
 Route::resource('matiereProgrammers', 'MatiereProgrammerController');
 
@@ -121,3 +126,4 @@ Route::resource('inscriptions', 'InscriptionController');
 Route::resource('seanceCours', 'SeanceCourController');
 
 Route::resource('presences', 'PresenceController');
+
