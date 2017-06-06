@@ -32,7 +32,7 @@ class GroupeMatiereController extends AppBaseController
         $this->groupeMatiereRepository->pushCriteria(new RequestCriteria($request));
         $groupeMatieres = $this->groupeMatiereRepository->all();
 
-        return view('groupe_matieres.index')
+        return view('modules.principal.groupe_matieres.index')
             ->with('groupeMatieres', $groupeMatieres);
     }
 
@@ -43,7 +43,7 @@ class GroupeMatiereController extends AppBaseController
      */
     public function create()
     {
-        return view('groupe_matieres.create');
+        return view('modules.principal.groupe_matieres.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class GroupeMatiereController extends AppBaseController
             return redirect(route('groupeMatieres.index'));
         }
 
-        return view('groupe_matieres.show')->with('groupeMatiere', $groupeMatiere);
+        return view('modules.principal.groupe_matieres.show')->with('groupeMatiere', $groupeMatiere);
     }
 
     /**
@@ -101,7 +101,7 @@ class GroupeMatiereController extends AppBaseController
             return redirect(route('groupeMatieres.index'));
         }
 
-        return view('groupe_matieres.edit')->with('groupeMatiere', $groupeMatiere);
+        return view('modules.principal.groupe_matieres.edit')->with('groupeMatiere', $groupeMatiere);
     }
 
     /**
