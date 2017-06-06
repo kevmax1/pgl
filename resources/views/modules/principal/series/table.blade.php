@@ -1,4 +1,4 @@
-<table class="table table-hover table-fw-widget" id="series">
+<table class="table table-fw-widget" id="series">
     <thead>
         <th>Code</th>
         <th>Libelle Fr</th>

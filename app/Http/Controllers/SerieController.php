@@ -43,7 +43,7 @@ class SerieController extends AppBaseController
             ->with('series', $series);
     }
 
-    public function find($id)
+    public function find($id=0)
     {
         $series = Serie::where('niveau_id',$id)->get();
         return view('modules.principal.series.table')
@@ -80,26 +80,6 @@ class SerieController extends AppBaseController
         Flash::success('Serie saved successfully.');
 
         return redirect(route('series.index'));
-    }
-
-    /**
-     * Display the specified Serie.
-     *
-     * @param  int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        $serie = $this->serieRepository->findWithoutFail($id);
-
-        if (empty($serie)) {
-            Flash::error('Serie not found');
-
-            return redirect(route('series.index'));
-        }
-
-        return view('modules.principal.series.show')->with('serie', $serie);
     }
 
     /**

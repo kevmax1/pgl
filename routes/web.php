@@ -82,6 +82,9 @@ Route::resource('anneeAcademiques', 'AnneeAcademiqueController');
 
 Route::resource('classes', 'ClasseController');
 
+Route::get('classes/find','ClasseController@find')->name('classes.find');
+Route::get('classes/find/{id}','ClasseController@find')->name('classes.find2');
+
 Route::resource('matiereProgrammers', 'MatiereProgrammerController');
 
 Route::resource('enseignants', 'EnseignantController');

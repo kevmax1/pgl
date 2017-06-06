@@ -38,6 +38,14 @@
                     </li>
                 </ul>
             </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-balance"></i><span>Classes</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('classes.index') }}">Liste des classes</a>
+                    </li>
+                    <li><a href="{{ route('classes.create') }}">Ajouter une classe</a>
+                    </li>
+                </ul>
+            </li>
           @foreach(myModuleAccess() as $access)
           @if( $access->menu->parent_id == 0 )
               <li class="parent" >

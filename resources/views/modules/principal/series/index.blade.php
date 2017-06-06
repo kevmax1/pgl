@@ -52,7 +52,7 @@
         </div>
         <div class="col-md-8">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-                <div class="panel-heading panel-heading-divider">Series<span class="panel-subtitle"></span></div>
+                <div class="panel-heading panel-heading-divider">Liste des series<span class="panel-subtitle"></span></div>
                 <div class="panel-body">
                     @include('flash::message')
                     <div class="clearfix"></div>
