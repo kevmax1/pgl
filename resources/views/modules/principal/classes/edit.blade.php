@@ -1,23 +1,35 @@
 @extends('layouts.app')
 
+@section('page-head')
+    <div class="page-head">
+        <h2 class="page-head-title">Classes</h2>
+        <ol class="breadcrumb page-head-nav">
+            <li><a href="#">Module principal</a></li>
+            <li><a href="#">Classes</a></li>
+            <li class="active">Editer</li>
+        </ol>
+    </div>
+@endsection
+
 @section('content')
-    <section class="content-header">
-        <h1>
-            Classe
-        </h1>
-   </section>
-   <div class="content">
-       @include('adminlte-templates::common.errors')
-       <div class="box box-primary">
-           <div class="box-body">
-               <div class="row">
-                   {!! Form::model($classe, ['route' => ['classes.update', $classe->id], 'method' => 'patch']) !!}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default panel-border-color panel-border-color-primary">
+                <div class="panel-heading panel-heading-divider">Editer une classe<span class="panel-subtitle"></span></div>
+                <div class="panel-body">
+                    @include('adminlte-templates::common.errors')
+                    <div class="box box-primary">
 
-                        @include('classes.fields')
-
-                   {!! Form::close() !!}
-               </div>
-           </div>
-       </div>
-   </div>
+                        <div class="box-body">
+                            <div class="row">
+                                {!! Form::model($classe, ['route' => ['classes.update', $classe->id], 'method' => 'patch']) !!}
+                                @include('modules.principal.classes.fields')
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

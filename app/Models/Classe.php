@@ -51,5 +51,9 @@ class Classe extends Model
         'serie_id' => 'required'
     ];
 
+    public function serie(){
+        return $this->belongsTo(Serie::class);
+    }
+
     
 }

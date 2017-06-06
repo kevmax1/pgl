@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateSerieRequest;
 use App\Http\Requests\UpdateSerieRequest;
+use App\Models\Serie;
 use App\Repositories\SerieRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\Nivau;
+use App\Models\Cycle;
+use App\Models\section;
 
 class SerieController extends AppBaseController
 {
@@ -32,9 +36,20 @@ class SerieController extends AppBaseController
         $this->serieRepository->pushCriteria(new RequestCriteria($request));
         $series = $this->serieRepository->all();
 
-        return view('modules.principal.series.index')
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        return view('modules.principal.series.index',compact('sections','cycles','niveaux'))
             ->with('series', $series);
     }
+
+    public function find($id=0)
+    {
+        $series = Serie::where('niveau_id',$id)->get();
+        return view('modules.principal.series.table')
+            ->with('series', $series);
+    }
+
 
     /**
      * Show the form for creating a new Serie.
@@ -43,7 +58,10 @@ class SerieController extends AppBaseController
      */
     public function create()
     {
-        return view('modules.principal.series.create');
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        return view('modules.principal.series.create',compact('sections','cycles','niveaux'));
     }
 
     /**
@@ -65,26 +83,6 @@ class SerieController extends AppBaseController
     }
 
     /**
-     * Display the specified Serie.
-     *
-     * @param  int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        $serie = $this->serieRepository->findWithoutFail($id);
-
-        if (empty($serie)) {
-            Flash::error('Serie not found');
-
-            return redirect(route('series.index'));
-        }
-
-        return view('modules.principal.series.show')->with('serie', $serie);
-    }
-
-    /**
      * Show the form for editing the specified Serie.
      *
      * @param  int $id
@@ -100,8 +98,10 @@ class SerieController extends AppBaseController
 
             return redirect(route('series.index'));
         }
-
-        return view('modules.principal.series.edit')->with('serie', $serie);
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        return view('modules.principal.series.edit',compact('sections','cycles','niveaux'))->with('serie', $serie);
     }
 
     /**

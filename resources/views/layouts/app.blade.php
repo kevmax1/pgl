@@ -18,6 +18,16 @@
     <![endif]-->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
     @yield('custom_css')
+      <style>
+          .page-head {
+              padding: 0px 25px 0px;
+              position: relative;
+          }
+          .panel-body {
+              padding: 8px 20px 10px;
+              border-radius: 0 0 3px 3px;
+          }
+      </style>
   </head>
   <body>
     <div id="app">
