@@ -32,7 +32,7 @@ class MatiereController extends AppBaseController
         $this->matiereRepository->pushCriteria(new RequestCriteria($request));
         $matieres = $this->matiereRepository->all();
 
-        return view('matieres.index')
+        return view('modules.principal.matieres.index')
             ->with('matieres', $matieres);
     }
 
@@ -43,7 +43,7 @@ class MatiereController extends AppBaseController
      */
     public function create()
     {
-        return view('matieres.create');
+        return view('modules.principal.matieres.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class MatiereController extends AppBaseController
             return redirect(route('matieres.index'));
         }
 
-        return view('matieres.show')->with('matiere', $matiere);
+        return view('modules.principal.matieres.show')->with('matiere', $matiere);
     }
 
     /**
@@ -101,7 +101,7 @@ class MatiereController extends AppBaseController
             return redirect(route('matieres.index'));
         }
 
-        return view('matieres.edit')->with('matiere', $matiere);
+        return view('modules.principal.matieres.edit')->with('matiere', $matiere);
     }
 
     /**
