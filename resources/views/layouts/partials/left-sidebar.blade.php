@@ -46,6 +46,23 @@
                     </li>
                 </ul>
             </li>
+            <li class="parent"><a href="#"><i class="icon mdi mdi-slideshare"></i><span>Elèves</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('classes.index') }}">Liste des élèves</a>
+                    </li>
+                    <li><a href="{{ route('classes.create') }}">Ajouter un élève</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="parent"><a href="#"><i class="icon mdi mdi-account-add"></i><span>Inscriptions</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('classes.index') }}">Liste des élèves</a>
+                    </li>
+                    <li><a href="{{ route('classes.create') }}">Ajouter un élève</a>
+                    </li>
+                </ul>
+            </li>
           @foreach(myModuleAccess() as $access)
           @if( $access->menu->parent_id == 0 )
               <li class="parent" >
