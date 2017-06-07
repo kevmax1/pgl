@@ -6,4 +6,5 @@ return [
     'module_principal' => 'Module principal',
     'lister' => 'Lister',
     'editer' => 'Editer',
+    'home' => 'Acceuil'
 ];
