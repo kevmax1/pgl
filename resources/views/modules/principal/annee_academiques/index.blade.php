@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('page-head')
     <div class="page-head">
-        <h2 class="page-head-title">Année Academiques</h2>
+        <h2 class="page-head-title">@lang('annee_academique.name')</h2>
         <ol class="breadcrumb page-head-nav">
-            <li><a href="#">Module principal</a></li>
-            <li><a href="#">Année Academiques</a></li>
-            <li class="active">Lister</li>
+            <li><a href="#">@lang('common.module_principal')</a></li>
+            <li><a href="#">@lang('annee_academique.name')</a></li>
+            <li class="active">@lang('common.lister')</li>
         </ol>
     </div>
 @endsection
@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-                <div class="panel-heading panel-heading-divider">Ajouter une année academique</div>
+                <div class="panel-heading panel-heading-divider">@lang('annee_academique.add')</div>
                 <div class="panel-body">
                     {!! Form::open(['route' => 'anneeAcademiques.store']) !!}
                     @include('modules.principal.annee_academiques.fields')
@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-6">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-                <div class="panel-heading panel-heading-divider">Liste des année academiques<span class="panel-subtitle"></span></div>
+                <div class="panel-heading panel-heading-divider">@lang('annee_academique.list')<span class="panel-subtitle"></span></div>
                 <div class="panel-body">
                     @include('flash::message')
                     <div class="clearfix"></div>
