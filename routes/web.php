@@ -86,7 +86,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('planings', 'PlaningController');
 
 
-
+    App::setLocale("fr");
     Route::get('eleves/find','EleveController@find')->name('eleves.find');
     Route::get('eleves/find/{id}','EleveController@find')->name('eleves.find2');
     Route::get('eleves/affecter/','EleveController@affecter')->name('eleves.affecter');
