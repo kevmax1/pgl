@@ -14,6 +14,7 @@
 
 Auth::routes();
 
+Route::get('/setLang','UTilities\LangueController@setLocale')->name('change.locale');
 
 Route::get('/contact_admin', function () {
 	    return view('contact_admin');
@@ -84,9 +85,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('plageHoraires', 'PlageHoraireController');
 
     Route::resource('planings', 'PlaningController');
-
-
-    App::setLocale("fr");
     Route::get('eleves/find','EleveController@find')->name('eleves.find');
     Route::get('eleves/find/{id}','EleveController@find')->name('eleves.find2');
     Route::get('eleves/affecter/','EleveController@affecter')->name('eleves.affecter');
