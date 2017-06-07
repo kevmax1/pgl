@@ -41,7 +41,6 @@ class EleveController extends AppBaseController
     {
         $this->eleveRepository->pushCriteria(new RequestCriteria($request));
         $eleves = $this->eleveRepository->all();
-
         return view('modules.principal.eleves.index')
             ->with('eleves', $eleves);
     }
@@ -58,6 +57,38 @@ class EleveController extends AppBaseController
         $classes = Classe::all();
         return view('modules.principal.eleves.affecter',compact('sections','cycles','niveaux','series','classes'));
     }
+
+    public function affecterStore(Request $request){
+        $data = $request->all();
+        $inscription = Inscription::where('id',$data['inscription'])
+            ->where('niveau_id',$data['niveau'])
+            ->first();
+        if($inscription !=null){
+            if ($inscription->classe_id == null){
+                $inscription->classe_id = $data['classe'];
+                $inscription->save();
+                return response()->json(['msg'=>'Elève ajoutée à cette classe avec succès'],200);
+            }else{
+                $inscription->classe_id = null;
+                $inscription->save();
+                return response()->json(['msg'=>'Elève retirer de cette classe avec succès'],200);
+            }
+        }else{
+            return response()->json(['msg'=>'Aucune inscription ne correspondant à votre requête n\' a été trouvé'],500);
+        }
+    }
+
+    public function find($id=0)
+    {
+        $niveau = Classe::find($id)->serie->niveau;
+        $inscriptions = Inscription::where('niveau_id',$niveau->id)
+                ->where(['classe_id'=>null,'classe_id'=>$id])
+                ->where('annee_academique_id',AnneeAcademique::where('encours',1)->first()->id)
+                ->get();
+        return view('modules.principal.eleves.affecterTable')
+            ->with('inscriptions', $inscriptions)->with('classe',$id);
+    }
+
     /**
      * Show the form for creating a new Eleve.
      *
