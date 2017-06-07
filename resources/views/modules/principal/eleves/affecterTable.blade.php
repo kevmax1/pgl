@@ -1,12 +1,13 @@
-<table class="table table-fw-widget" id="eleves">
-    <thead>
+{!! Form::open(['route' => 'eleves.affecter.Store',"class"=>'form-horizontal group-border-dashed']) !!}
+    <table class="table table-fw-widget" id="eleves">
+        <thead>
         <th>Matricule</th>
         <th>Nom</th>
         <th>Prenom</th>
         <th>Sexe</th>
         <th>Action</th>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         @foreach($inscriptions as $inscription)
             <tr>
                 <td>{!! $inscription->eleve->matricule !!}</td>
@@ -14,18 +15,20 @@
                 <td>{!! $inscription->eleve->prenom !!}</td>
                 <td>{!! $inscription->eleve->sexe->libelle_fr !!}</td>
                 <td>
-                    {!! Form::open(['route' => ['eleves.destroy', $inscription->eleve->id], 'method' => 'delete']) !!}
-                    <div class='btn-group'>
-                        <a href="{!! route('eleves.show', [$inscription->eleve->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{!! route('eleves.edit', [$inscription->eleve->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    <div class="checkbox">
+                        <label>
+                        <input name="eleves[]" onclick="toogleInscription(event)" id="{{ $inscription->id }}" value="{{ $inscription->id }}" {{ ($inscription->classe_id)? 'checked': '' }} type="checkbox">
+                        </label>
                     </div>
-                    {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    @if(isset($inscription))
+        <input type="hidden" name="niveau-id" id="niveau-id" value="{{ $inscription->niveau->id }}">
+    @endif
+{!! Form::close() !!}
 <script>
     $("#eleves").dataTable({
         "language":{
@@ -51,4 +54,27 @@
             }
         }
     });
+    $classe = {{ $classe }}
+    function toogleInscription(e){
+        $input = e.target;
+        $.post("{{ route('eleves.affecter.Store') }}",{
+            niveau: $("#niveau-id").val(),
+            classe: $classe,
+            inscription: $input.id
+        }).done(function(data){
+            $.gritter.add({
+                title: 'Succès',
+                text: data.msg,
+                class_name: 'color success'
+            });
+        }).fail(function (data){
+            console.log(data);
+            $.gritter.add({
+                title: 'Erreur',
+                text: data.msg,
+                class_name: 'color danger'
+            });
+            $input.prop("checked",!$input.prop("checked"));
+        });
+    }
 </script>

@@ -24,7 +24,7 @@ class Eleve extends Model
         'matricule',
         'nom',
         'prenom',
-        'sexe',
+        'sexe_id',
         'date_naissance'
     ];
 
@@ -37,7 +37,7 @@ class Eleve extends Model
         'matricule' => 'string',
         'nom' => 'string',
         'prenom' => 'string',
-        'sexe' => 'string',
+        'sexe_id' => 'integer',
         'date_naissance' => 'date'
     ];
 
@@ -48,9 +48,26 @@ class Eleve extends Model
      */
     public static $rules = [
         'nom' => 'required',
-        'sexe' => 'required',
-        'date_naissance' => 'required'
+        'sexe_id' => 'required',
+        'date_naissance' => 'required',
+        'niveau_id' => 'required',
+        'nom_parent_1' => 'required',
+        'prenom_parent_1' => 'required',
+        'telephone_parent_1' => 'required',
+        'adresse_parent_1' => 'required',
     ];
 
-    
+    public function inscriptions(){
+        return $this->hasMany(Inscription::class);
+    }
+
+    public function parents(){
+        return $this->hasMany(Parent2::class);
+    }
+
+    public function sexe()
+    {
+        return $this->belongsTo(Sexe::class);
+    }
+
 }

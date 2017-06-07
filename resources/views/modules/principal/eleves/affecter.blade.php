@@ -5,7 +5,7 @@
         <ol class="breadcrumb page-head-nav">
             <li><a href="#">Module principal</a></li>
             <li><a href="#">Elèves</a></li>
-            <li class="active">Lister</li>
+            <li class="active">Affecter</li>
         </ol>
     </div>
 @endsection
@@ -15,14 +15,6 @@
             <div class="panel panel-default panel-border-color panel-border-color-primary">
                 <div class="panel-heading panel-heading-divider">Choisir une classe</div>
                 <div class="panel-body">
-                    <div class="form-group xs-pt-10">
-                        <label for="annee_id">Année Academiques:</label>
-                        <select class="form-control" id="annee_id" name="annee_id">
-                            @foreach($annees as $annee)
-                                <option value="{{ $annee->id }}">{{ $annee->libelle }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     <div class="form-group xs-pt-10">
                         <label for="section_id">Section:</label>
                         <select class="form-control" id="section_id" name="section_id">
@@ -119,15 +111,14 @@
         } );
         function getEleve(){
             $classe = $("#classe_id").val();
-            $annee = $('#annee_id').val();
-            if($classe != null && $annee != null){
-                $.post("{{ route('eleves.index.find') }}/?classe="+$classe+"&annee="+$annee,function(data){
+            if($classe != null){
+                $.get("{{ route('eleves.find') }}/"+$classe,function(data){
                     $("#data").html(data);
                 });
             }else{
                 $.gritter.add({
                     title: 'Erreur',
-                    text: 'Veuillez selectionner une classe et une année academique.',
+                    text: 'Veuillez selectionner une classe.',
                     class_name: 'color danger'
                 });
             }
