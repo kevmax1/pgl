@@ -35,9 +35,9 @@ class AnneeAcademiqueController extends AppBaseController
     {
 
         /*$parent = menu::create([
-            "libelle"=>"Classes",
-            "libelle_en"=>"Classes",
-            "icon"=>"icon mdi mdi-balance",
+            "libelle"=>"Elèves",
+            "libelle_en"=>"Students",
+            "icon"=>"icon mdi mdi-slideshare",
             "parent_id"=>0,
             "route"=>"#",
             "route_name"=>"#",
@@ -45,22 +45,33 @@ class AnneeAcademiqueController extends AppBaseController
         ]);
         acces::create(["role_id"=>1,"menu_id"=>$parent->id]);
         $menu = menu::create([
-            "libelle"=>"Liste des classes",
-            "libelle_en"=>"List of classes",
+            "libelle"=>"Liste des élèves",
+            "libelle_en"=>"List of students",
             "icon"=>"#",
             "parent_id"=>$parent->id,
-            "route"=>"/classes",
-            "route_name"=>"classes.index",
+            "route"=>"/eleves",
+            "route_name"=>"eleves.index",
             "module_id"=>"1",
         ]);
         acces::create(["role_id"=>1,"menu_id"=>$menu->id]);
         $menu = menu::create([
-            "libelle"=>"Ajouter une classe",
-            "libelle_en"=>"Add a classe",
+            "libelle"=>"Ajouter un élève",
+            "libelle_en"=>"Add a student",
             "icon"=>"#",
             "parent_id"=>$parent->id,
-            "route"=>"/classes/create",
-            "route_name"=>"classes.create",
+            "route"=>"/eleves/create",
+            "route_name"=>"eleves.create",
+            "module_id"=>"1",
+        ]);
+        acces::create(["role_id"=>1,"menu_id"=>$menu->id]);
+
+        $menu = menu::create([
+            "libelle"=>"Affecter élèves à classe",
+            "libelle_en"=>"Assign students to class",
+            "icon"=>"#",
+            "parent_id"=>$parent->id,
+            "route"=>"/classes/affecter",
+            "route_name"=>"classes.affecter",
             "module_id"=>"1",
         ]);
         acces::create(["role_id"=>1,"menu_id"=>$menu->id]);

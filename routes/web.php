@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('eleves/find/{id}','EleveController@find')->name('eleves.find2');
     Route::get('eleves/affecter/','EleveController@affecter')->name('eleves.affecter');
     Route::post('eleves/affecter/','EleveController@affecterStore')->name('eleves.affecter.Store');
+    Route::post('eleves/index/find','EleveController@findIndex')->name('eleves.index.find');
     Route::resource('eleves', 'EleveController');
 
     Route::resource('parents', 'ParentController');

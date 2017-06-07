@@ -31,16 +31,6 @@
               </li>
           @endif
           @endforeach
-            <li class="parent"><a href="#"><i class="icon mdi mdi-slideshare"></i><span>Elèves</span></a>
-                <ul class="sub-menu">
-                    <li><a href="{{ route('eleves.index') }}">Liste des élèves</a>
-                    </li>
-                    <li><a href="{{ route('eleves.create') }}">Ajouter un élève</a>
-                    </li>
-                    <li><a href="{{ route('eleves.affecter') }}">Affecter élèves à classe</a>
-                    </li>
-                </ul>
-            </li>
         </ul>
       </div>
     </div>
