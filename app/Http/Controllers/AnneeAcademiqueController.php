@@ -108,7 +108,7 @@ class AnneeAcademiqueController extends AppBaseController
         AnneeAcademique::where('id','>',0)->update(['encours'=>0]);
         $anneeAcademique->encours = 1;
         $anneeAcademique->save();
-        Flash::success('Annee Academique saved successfully.');
+        Flash::success(__('annee_academique.save'));
         return redirect(route('anneeAcademiques.index'));
     }
 
@@ -148,7 +148,7 @@ class AnneeAcademiqueController extends AppBaseController
             return redirect(route('anneeAcademiques.index'));
         }
         $anneeAcademique = $this->anneeAcademiqueRepository->update($request->all(), $id);
-        Flash::success('Annee Academique updated successfully.');
+        Flash::success(__('annee_academique.update'));
         return redirect(route('anneeAcademiques.index'));
     }
 
@@ -171,7 +171,7 @@ class AnneeAcademiqueController extends AppBaseController
 
         $this->anneeAcademiqueRepository->delete($id);
 
-        Flash::success('Annee Academique deleted successfully.');
+        Flash::success(__('annee_academique.destroy'));
 
         return redirect(route('anneeAcademiques.index'));
     }

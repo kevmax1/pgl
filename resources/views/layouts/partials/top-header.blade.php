@@ -1,5 +1,3 @@
-<?php $lang = (Session::get('lang')!=null)?Session::get('lang'):'fr'; ?>
-{{ App::setLocale($lang) }}
 <div class="container-fluid">
   <div class="navbar-header"><a href="{{url('/')}}" class="navbar-brand"></a></div>
   <div class="be-right-navbar">
