@@ -22,9 +22,7 @@ Route::get('/contact_admin', function () {
 Route::post('/contact_admin', 'HomeController@contact_admin');
 
 Route::group(['middleware' => ['auth']], function(){
-	Route::get('/', function () {
-	    return view('home');
-	});
+	Route::get('/','HomeController@index')->name('home');
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::resource('roles', 'roleController');
 
