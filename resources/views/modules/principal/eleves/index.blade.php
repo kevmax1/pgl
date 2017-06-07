@@ -15,7 +15,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('eleves.table')
+                    @include('modules.principal.eleves.table')
             </div>
         </div>
     </div>

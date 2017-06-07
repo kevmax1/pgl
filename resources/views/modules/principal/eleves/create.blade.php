@@ -1,24 +1,18 @@
 @extends('layouts.app')
 
-@section('content')
-    <section class="content-header">
-        <h1>
-            Eleve
-        </h1>
-    </section>
-    <div class="content">
-        @include('adminlte-templates::common.errors')
-        <div class="box box-primary">
-
-            <div class="box-body">
-                <div class="row">
-                    {!! Form::open(['route' => 'eleves.store']) !!}
-
-                        @include('eleves.fields')
-
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
+@section('page-head')
+    <div class="page-head">
+        <h2 class="page-head-title">Elèves</h2>
+        <ol class="breadcrumb page-head-nav">
+            <li><a href="#">Module principal</a></li>
+            <li><a href="#">Elèves</a></li>
+            <li class="active">Ajouter</li>
+        </ol>
     </div>
+@endsection
+
+@section('content')
+    {!! Form::open(['route' => 'eleves.store',"class"=>'form-horizontal group-border-dashed']) !!}
+        @include('modules.principal.eleves.fields')
+    {!! Form::close() !!}
 @endsection

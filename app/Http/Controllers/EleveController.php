@@ -4,10 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateEleveRequest;
 use App\Http\Requests\UpdateEleveRequest;
+use App\Models\AnneeAcademique;
+use App\Models\Classe;
+use App\Models\Cycle;
+use App\Models\Inscription;
+use App\Models\Nivau;
+use App\Models\Parent2;
+use App\Models\section;
+use App\Models\Serie;
+use App\Models\Sexe;
 use App\Repositories\EleveRepository;
-use App\Http\Controllers\AppBaseController;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -32,10 +42,22 @@ class EleveController extends AppBaseController
         $this->eleveRepository->pushCriteria(new RequestCriteria($request));
         $eleves = $this->eleveRepository->all();
 
-        return view('eleves.index')
+        return view('modules.principal.eleves.index')
             ->with('eleves', $eleves);
     }
 
+    public function affecter(){
+        if (AnneeAcademique::where('encours',1)->count()==0){
+            Flash::error('Aucune année academiques en cours');
+            return redirect(route('anneeAcademiques.index'));
+        }
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        $series = Serie::all();
+        $classes = Classe::all();
+        return view('modules.principal.eleves.affecter',compact('sections','cycles','niveaux','series','classes'));
+    }
     /**
      * Show the form for creating a new Eleve.
      *
@@ -43,7 +65,11 @@ class EleveController extends AppBaseController
      */
     public function create()
     {
-        return view('eleves.create');
+        $sexes = Sexe::all();
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        return view('modules.principal.eleves.create',compact("sexes",'sections','cycles','niveaux'));
     }
 
     /**
@@ -56,12 +82,47 @@ class EleveController extends AppBaseController
     public function store(CreateEleveRequest $request)
     {
         $input = $request->all();
-
-        $eleve = $this->eleveRepository->create($input);
-
-        Flash::success('Eleve saved successfully.');
-
-        return redirect(route('eleves.index'));
+        $data = $request->all();
+        DB::beginTransaction();
+        try{
+            $input['matricule']="0";
+            $input['date_naissance']=Carbon::parse($input['date_naissance'])->format('Y-m-d');
+            $eleve = $this->eleveRepository->create($input);
+            $eleve->matricule = "LY-".Carbon::today()->format('Y')."-".$eleve->id;
+            $eleve->date_naissance =Carbon::parse($eleve->date_naissance)->format('Y-m-d');;
+            $eleve->save();
+            $parent1 = Parent2::create([
+                'nom'=>$data["nom_parent_1"],
+                'prenom'=>$data["prenom_parent_1"],
+                'adresse'=>$data["adresse_parent_1"],
+                'telphone'=>$data["telephone_parent_1"],
+                'eleve_id'=>$eleve->id
+            ]);
+            $parent2 = true;
+            if ($data["nom_parent_2"] != null && $data["prenom_parent_2"] != null && $data["telephone_parent_2"] != null && $data["adresse_parent_2"] != null){
+                $parent2 = Parent2::create([
+                    'nom'=>$data["nom_parent_2"],
+                    'prenom'=>$data["prenom_parent_2"],
+                    'adresse'=>$data["adresse_parent_2"],
+                    'telphone'=>$data["telephone_parent_2"],
+                    'eleve_id'=>$eleve->id
+                ]);
+            }
+            $inscription = Inscription::create([
+                'date_inscription'=>Carbon::today()->format('Y-m-d'),
+                'annee_academique_id'=>AnneeAcademique::where('encours',1)->first()->id,
+                'niveau_id'=>$data["niveau_id"],
+                'eleve_id'=>$eleve->id
+            ]);
+            DB::commit();
+            Flash::success('Eleve saved successfully.');
+            return redirect(route('eleves.index'));
+        }catch (\Exception $e){
+            dd($request->all());
+            Flash::error('Erreur lors de l\'ajout de l\'élève.');
+            DB::rollback();
+            return redirect(route('eleves.create'));
+        }
     }
 
     /**
@@ -94,14 +155,27 @@ class EleveController extends AppBaseController
     public function edit($id)
     {
         $eleve = $this->eleveRepository->findWithoutFail($id);
-
         if (empty($eleve)) {
             Flash::error('Eleve not found');
-
             return redirect(route('eleves.index'));
         }
-
-        return view('eleves.edit')->with('eleve', $eleve);
+        $i =1;
+        foreach ($eleve->parents as $parent){
+            $text = "nom_parent_"."$i";
+            $eleve->$text = $parent->nom;
+            $text = "prenom_parent_"."$i";
+            $eleve->$text = $parent->prenom;
+            $text = "telephone_parent_"."$i";
+            $eleve->$text = $parent->telphone;
+            $text = "adresse_parent_"."$i";
+            $eleve->$text = $parent->adresse;
+            $i++;
+        }
+        $sexes = Sexe::all();
+        $sections = section::all();
+        $cycles = Cycle::all();
+        $niveaux = Nivau::all();
+        return view('modules.principal.eleves.edit',compact("sexes",'sections','cycles','niveaux'))->with('eleve', $eleve);
     }
 
     /**
@@ -115,18 +189,48 @@ class EleveController extends AppBaseController
     public function update($id, UpdateEleveRequest $request)
     {
         $eleve = $this->eleveRepository->findWithoutFail($id);
-
         if (empty($eleve)) {
             Flash::error('Eleve not found');
-
             return redirect(route('eleves.index'));
         }
+        DB::beginTransaction();
+        try{
+            $eleve = $this->eleveRepository->update($request->all(), $id);
+            $data = $request->all();
+            $parent = [
+                'nom'=>$data["nom_parent_1"],
+                'prenom'=>$data["prenom_parent_1"],
+                'adresse'=>$data["adresse_parent_1"],
+                'telphone'=>$data["telephone_parent_1"]
+            ];
+            $eleve->parents()->first()->update($parent);
+            if ($data["nom_parent_2"] != null && $data["prenom_parent_2"] != null && $data["telephone_parent_2"] != null && $data["adresse_parent_2"] != null){
+                $parent = [
+                    'nom'=>$data["nom_parent_2"],
+                    'prenom'=>$data["prenom_parent_2"],
+                    'adresse'=>$data["adresse_parent_2"],
+                    'telphone'=>$data["telephone_parent_2"]
+                ];
+                if ($eleve->parents()->count() == 1){
+                    $eleve->parents()->create($parent);
+                }else{
+                    $eleve->parents()->orderBy('id', 'desc')->first()->update($parent);
+                }
 
-        $eleve = $this->eleveRepository->update($request->all(), $id);
-
-        Flash::success('Eleve updated successfully.');
-
-        return redirect(route('eleves.index'));
+            }
+            $eleve->inscriptions()->orderBy('id', 'desc')->first()->update([
+                'annee_academique_id'=>AnneeAcademique::where('encours',1)->first()->id,
+                'niveau_id'=>$data["niveau_id"]
+            ]);
+            DB::commit();
+            Flash::success('Eleve updated successfully.');
+            return redirect(route('eleves.index'));
+        }catch (\Exception $e){
+            dd($request->all());
+            Flash::error('Erreur lors de la mise à jour de l\'élève.');
+            DB::rollback();
+            return redirect(route('eleves.edit',$id));
+        }
     }
 
     /**

@@ -115,6 +115,7 @@ Route::resource('planings', 'PlaningController');
 
 
 
+Route::get('eleves/affecter/','EleveController@affecter')->name('eleves.affecter');
 Route::resource('eleves', 'EleveController');
 
 Route::resource('parents', 'ParentController');
