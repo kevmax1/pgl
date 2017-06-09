@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\Classe;
+use App\Models\Matiere;
+use App\Models\Chapitre;
+use App\Models\Nivau;
+use App\Models\Serie;
+use App\Models\Section;
+use App\Models\AnneeAcademique;
+use App\Models\GroupeMatiere;
+use App\Models\MatiereProgrammer;
 
 class ChapitreController extends AppBaseController
 {
@@ -31,8 +40,13 @@ class ChapitreController extends AppBaseController
     {
         $this->chapitreRepository->pushCriteria(new RequestCriteria($request));
         $chapitres = $this->chapitreRepository->all();
-
-        return view('chapitres.index')
+        $annees = AnneeAcademique::all();
+        $groupes = GroupeMatiere::all();
+        $niveaux = Nivau::all();
+        $series = Serie::all();
+        $matieres = Matiere::all();
+        $sections = Section::all();
+        return view('modules.principal.chapitres.index',compact('annees','sections','groupes','niveaux','series','matieres'))
             ->with('chapitres', $chapitres);
     }
 
@@ -43,7 +57,7 @@ class ChapitreController extends AppBaseController
      */
     public function create()
     {
-        return view('chapitres.create');
+        return view('modules.principal.chapitres.create');
     }
 
     /**
@@ -81,7 +95,7 @@ class ChapitreController extends AppBaseController
             return redirect(route('chapitres.index'));
         }
 
-        return view('chapitres.show')->with('chapitre', $chapitre);
+        return view('modules.principal.chapitres.show')->with('chapitre', $chapitre);
     }
 
     /**
@@ -101,7 +115,7 @@ class ChapitreController extends AppBaseController
             return redirect(route('chapitres.index'));
         }
 
-        return view('chapitres.edit')->with('chapitre', $chapitre);
+        return view('modules.principal.chapitres.edit')->with('chapitre', $chapitre);
     }
 
     /**
@@ -151,5 +165,39 @@ class ChapitreController extends AppBaseController
         Flash::success('Chapitre deleted successfully.');
 
         return redirect(route('chapitres.index'));
+    }
+
+    public function chapitre(Request $req){
+        $prog = MatiereProgrammer::find($req->id);
+        $list = '';
+        if(!is_null($prog->ordre_chapitres) && $prog->ordre_chapitres != ''){
+            $ordres = json_decode($prog->ordre_chapitres);
+            //dd($ordres);
+            $prog->set_chap($ordres);
+            $prog->set_chap_del($ordres);
+        }
+        return view('modules.principal.chapitres.table_chapitres')->with(['chaps'=> $prog,'id'=>$req->id]); 
+    }
+
+    
+
+    public function add_chap(Request $req){
+        $chap = Chapitre::create($req->all());
+        return response()->json($chap);
+    }
+    public function edit_order(Request $req){
+        $rep = MatiereProgrammer::find($req->id);
+        $rep->ordre_chapitres = $req->newO;
+        $rep->save();
+        return response()->json($rep);
+    }
+    public function delete_chapitre(Request $req){
+        $chap = Chapitre::find($req->id);
+        $prog = MatiereProgrammer::find($chap->matiere_programmer_id);
+        $ordres = json_decode($prog->ordre_chapitres);
+        $prog->delet_chapitre($chap->id, $ordres);
+        $prog->ordre_chapitres = $prog->new_ordre;
+        $prog->save();
+        return response()->json(['id'=>$prog->id]);
     }
 }

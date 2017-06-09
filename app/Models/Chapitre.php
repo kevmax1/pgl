@@ -21,11 +21,7 @@ class Chapitre extends Model
 
 
     public $fillable = [
-        'odre',
         'libelle',
-        'nbr_heure',
-        'nbr_heure_realiser',
-        'terminer',
         'matiere_programmer_id'
     ];
 
@@ -35,11 +31,7 @@ class Chapitre extends Model
      * @var array
      */
     protected $casts = [
-        'odre' => 'integer',
         'libelle' => 'string',
-        'nbr_heure' => 'integer',
-        'nbr_heure_realiser' => 'integer',
-        'terminer' => 'boolean',
         'matiere_programmer_id' => 'integer'
     ];
 
@@ -49,11 +41,11 @@ class Chapitre extends Model
      * @var array
      */
     public static $rules = [
-        'odre' => 'required',
         'libelle' => 'required',
-        'nbr_heure' => 'required',
         'matiere_programmer_id' => 'required'
     ];
 
-    
+    public function matiere_programmer(){
+        return $this->belongsTo('App\Models\MatiereProgrammer');
+    }
 }

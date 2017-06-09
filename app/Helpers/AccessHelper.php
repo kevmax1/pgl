@@ -1,5 +1,6 @@
 <?php
 use App\Models\menu;
+use App\Models\Chapitre;
 
 if (!function_exists('DummyFunction')) {
 
@@ -36,7 +37,7 @@ if (!function_exists('myModuleAccess')) {
 }
 if (!function_exists('hasAccess')) {
     function hasAccess($route){
-    	dd(request(), menu::where('route', $route)->get());
+    	//dd(request(), menu::where('route', $route)->get());
     	return Auth::user()->role->access;
     }
 }
