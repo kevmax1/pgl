@@ -1,5 +1,7 @@
+<?php $lang = (Session::get('lang')!=null)?Session::get('lang'):'fr'; ?>
+{{ App::setLocale($lang) }}
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ $lang }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -18,10 +20,20 @@
     <![endif]-->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
     @yield('custom_css')
+      <style>
+          .page-head {
+              padding: 0px 25px 0px;
+              position: relative;
+          }
+          .panel-body {
+              padding: 8px 20px 10px;
+              border-radius: 0 0 3px 3px;
+          }
+      </style>
   </head>
   <body>
     <div id="app">
-      <div class="be-wrapper be-fixed-sidebar">
+      <div class="be-wrapper be-fixed-sidebar {{ Session::has('current_module') ?  Session::get('current_module')->couleur : ''}}">
         <nav class="navbar navbar-default navbar-fixed-top be-top-header">
           @include('layouts.partials.top-header')
         </nav>

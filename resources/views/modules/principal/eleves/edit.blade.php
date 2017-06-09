@@ -1,23 +1,18 @@
 @extends('layouts.app')
 
+@section('page-head')
+    <div class="page-head">
+        <h2 class="page-head-title">Elèves</h2>
+        <ol class="breadcrumb page-head-nav">
+            <li><a href="#">Module principal</a></li>
+            <li><a href="#">Elèves</a></li>
+            <li class="active">Editer</li>
+        </ol>
+    </div>
+@endsection
+
 @section('content')
-    <section class="content-header">
-        <h1>
-            Eleve
-        </h1>
-   </section>
-   <div class="content">
-       @include('adminlte-templates::common.errors')
-       <div class="box box-primary">
-           <div class="box-body">
-               <div class="row">
-                   {!! Form::model($eleve, ['route' => ['eleves.update', $eleve->id], 'method' => 'patch']) !!}
-
-                        @include('eleves.fields')
-
-                   {!! Form::close() !!}
-               </div>
-           </div>
-       </div>
-   </div>
+    {!! Form::model($eleve, ['route' => ['eleves.update', $eleve->id], 'method' => 'patch',"class"=>'form-horizontal group-border-dashed']) !!}
+    @include('modules.principal.eleves.fields')
+    {!! Form::close() !!}
 @endsection

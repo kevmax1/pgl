@@ -6,10 +6,18 @@ use App\Http\Requests\CreateMatiereProgrammerRequest;
 use App\Http\Requests\UpdateMatiereProgrammerRequest;
 use App\Repositories\MatiereProgrammerRepository;
 use App\Http\Controllers\AppBaseController;
+use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\Classe;
+use App\Models\Matiere;
+use App\Models\Nivau;
+use App\Models\Serie;
+use App\Models\AnneeAcademique;
+use App\Models\GroupeMatiere;
+use App\Models\MatiereProgrammer;
 
 class MatiereProgrammerController extends AppBaseController
 {
@@ -27,12 +35,17 @@ class MatiereProgrammerController extends AppBaseController
      * @param Request $request
      * @return Response
      */
+    
     public function index(Request $request)
     {
         $this->matiereProgrammerRepository->pushCriteria(new RequestCriteria($request));
         $matiereProgrammers = $this->matiereProgrammerRepository->all();
-
-        return view('matiere_programmers.index')
+        $annees = AnneeAcademique::all();
+        $groupes = GroupeMatiere::all();
+        $niveaux = Nivau::all();
+        $series = Serie::all();
+        $matieres = Matiere::all();
+        return view('modules.principal.matiere_programmers.index',compact('annees','groupes','niveaux','series','matieres'))
             ->with('matiereProgrammers', $matiereProgrammers);
     }
 
@@ -43,7 +56,7 @@ class MatiereProgrammerController extends AppBaseController
      */
     public function create()
     {
-        return view('matiere_programmers.create');
+        return view('modules.principal.matiere_programmers.create');
     }
 
     /**
@@ -81,7 +94,7 @@ class MatiereProgrammerController extends AppBaseController
             return redirect(route('matiereProgrammers.index'));
         }
 
-        return view('matiere_programmers.show')->with('matiereProgrammer', $matiereProgrammer);
+        return view('modules.principal.matiere_programmers.show')->with('matiereProgrammer', $matiereProgrammer);
     }
 
     /**
@@ -101,7 +114,7 @@ class MatiereProgrammerController extends AppBaseController
             return redirect(route('matiereProgrammers.index'));
         }
 
-        return view('matiere_programmers.edit')->with('matiereProgrammer', $matiereProgrammer);
+        return view('modules.principal.matiere_programmers.edit')->with('matiereProgrammer', $matiereProgrammer);
     }
 
     /**
@@ -151,5 +164,37 @@ class MatiereProgrammerController extends AppBaseController
         Flash::success('Matiere Programmer deleted successfully.');
 
         return redirect(route('matiereProgrammers.index'));
+    }
+
+    public function get_all(Request $req){
+        $allp = MatiereProgrammer::where([
+                'serie_id'=>$req->idserie,
+                'annee_academique_id'=>$req->idanne,
+                'groupe_matiere_id'=>$req->idgroupe,
+            ])->get();
+        return view('modules.principal.chapitres.table_programme')->with(['progs'=> $allp]);
+
+    }
+
+    public function matiere(Request $req){
+        $matiere = new Matiere();
+        $res = $matiere->otherProgramme($req);
+        return view('modules.principal.matiere_programmers.table_matiere')->with(['matieres'=> $res,'req'=>$req]);
+    }
+
+    public function matiere2(Request $req){
+        $matiere_p = new MatiereProgrammer();
+        $res = $matiere_p->otherProgrammeIn($req);
+        return view('modules.principal.matiere_programmers.table_matiere2')->with(['matieres'=> $res,'req'=>$req]);
+    }
+
+    public function save(Request $req){
+        $rep = MatiereProgrammer::create($req->all());
+        return response()->json($req);
+    }
+    public function delete(Request $req){
+        $mp = MatiereProgrammer::find($req->id);
+        $mp->destroy($req->id);
+        return response()->json($mp);
     }
 }

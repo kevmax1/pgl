@@ -45,5 +45,7 @@ class module extends Model
         'couleur' => 'required'
     ];
 
-    
+    public function menus(){
+        return $this->hasMany('App\Models\menu');
+    }
 }
