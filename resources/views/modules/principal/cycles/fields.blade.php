@@ -12,8 +12,8 @@
 
 <!-- Section Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('section_id', 'Section Id:') !!}
-    {!! Form::number('section_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('section_id', 'Section:') !!}
+    {!! Form::select('section_id', $section, isset($cycle) ? $cycle->section_id : null,['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

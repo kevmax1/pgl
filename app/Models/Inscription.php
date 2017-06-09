@@ -24,7 +24,10 @@ class Inscription extends Model
         'date_inscription',
         'annee_academique_id',
         'niveau_id',
-        'eleve_id'
+        'eleve_id',
+        'payer',
+        'numero_recu',
+        'classe_id'
     ];
 
     /**
@@ -47,8 +50,19 @@ class Inscription extends Model
     public static $rules = [
         'annee_academique_id' => 'required',
         'niveau_id' => 'required',
-        'eleve_id' => 'required'
+        'eleve_id' => 'required',
     ];
 
-    
+    public function classe(){
+        return $this->belongsTo(Classe::class);
+    }
+    public function niveau(){
+        return $this->belongsTo(Nivau::class);
+    }
+    public function eleve(){
+        return $this->belongsTo(Eleve::class);
+    }
+    public function annee_academique(){
+        return $this->belongsTo(AnneeAcademique::class);
+    }
 }

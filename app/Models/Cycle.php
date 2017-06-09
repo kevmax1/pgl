@@ -48,5 +48,8 @@ class Cycle extends Model
         'section_id' => 'required'
     ];
 
+    public function section(){
+        return $this->belongsTo('\App\Models\section');
+    }
     
 }

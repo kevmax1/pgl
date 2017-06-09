@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class menu
@@ -50,13 +51,29 @@ class menu extends Model
      * @var array
      */
     public static $rules = [
-        'libelle' => 'required',
-        'libelle_en' => 'required',
+        'libelle' => 'required|unique:menus',
+        'libelle_en' => 'required|unique:menus',
         'parent_id' => 'required',
         'route' => 'required',
         'route_name' => 'required',
         'module_id' => 'required'
     ];
 
-    
+    public function module(){
+        return $this->belongsTo('App\Models\module');
+    }
+
+    public function fils(){
+        return menu::where('parent_id', $this->id)->get();
+    }
+
+    public function getLibelleAttribute($value)
+    {
+        $lang = (Session::get('lang')!=null)?Session::get('lang'):'fr';
+        if ($lang == 'en')
+            return $this->libelle_en;
+        else
+            return $value;
+    }
+
 }

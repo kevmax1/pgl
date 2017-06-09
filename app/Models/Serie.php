@@ -51,5 +51,8 @@ class Serie extends Model
         'niveau_id' => 'required'
     ];
 
+    public function niveau(){
+        return $this->belongsTo('\App\Models\Nivau');
+    }
     
 }

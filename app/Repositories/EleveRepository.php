@@ -14,7 +14,7 @@ class EleveRepository extends BaseRepository
         'matricule',
         'nom',
         'prenom',
-        'sexe',
+        'sexe_id',
         'date_naissance'
     ];
 

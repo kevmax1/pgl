@@ -1,5 +1,6 @@
 <table class="table table-responsive" id="menus-table">
     <thead>
+        <th>#</th>
         <th>Libelle</th>
         <th>Libelle En</th>
         <th>Icon</th>
@@ -12,6 +13,7 @@
     <tbody>
     @foreach($menus as $menu)
         <tr>
+            <td>{!! $menu->id !!}</td>
             <td>{!! $menu->libelle !!}</td>
             <td>{!! $menu->libelle_en !!}</td>
             <td>{!! $menu->icon !!}</td>
