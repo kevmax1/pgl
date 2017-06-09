@@ -10,7 +10,7 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
-                    @include('compositions.show_fields')
+                    @include('modules.principal.compositions.show_fields')
                     <a href="{!! route('compositions.index') !!}" class="btn btn-default">Back</a>
                 </div>
             </div>

@@ -15,7 +15,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('compositions.table')
+                    @include('modules.principal.compositions.table')
             </div>
         </div>
     </div>

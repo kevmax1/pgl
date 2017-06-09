@@ -2,7 +2,7 @@
     <thead>
         <th>Libelle Fr</th>
         <th>Libelle En</th>
-        <th colspan="3">Action</th>
+        <th colspan="2">Action</th>
     </thead>
     <tbody>
     @foreach($matieres as $matiere)
@@ -12,7 +12,6 @@
             <td>
                 {!! Form::open(['route' => ['matieres.destroy', $matiere->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('matieres.show', [$matiere->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('matieres.edit', [$matiere->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                 </div>

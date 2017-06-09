@@ -32,7 +32,7 @@ class CompositionController extends AppBaseController
         $this->compositionRepository->pushCriteria(new RequestCriteria($request));
         $compositions = $this->compositionRepository->all();
 
-        return view('compositions.index')
+        return view('modules.principal.compositions.index')
             ->with('compositions', $compositions);
     }
 
@@ -43,7 +43,7 @@ class CompositionController extends AppBaseController
      */
     public function create()
     {
-        return view('compositions.create');
+        return view('modules.principal.compositions.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class CompositionController extends AppBaseController
             return redirect(route('compositions.index'));
         }
 
-        return view('compositions.show')->with('composition', $composition);
+        return view('modules.principal.compositions.show')->with('composition', $composition);
     }
 
     /**
@@ -101,7 +101,7 @@ class CompositionController extends AppBaseController
             return redirect(route('compositions.index'));
         }
 
-        return view('compositions.edit')->with('composition', $composition);
+        return view('modules.principal.compositions.edit')->with('composition', $composition);
     }
 
     /**

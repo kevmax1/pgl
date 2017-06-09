@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use DB;
 /**
  * Class Matiere
  * @package App\Models
@@ -45,5 +46,15 @@ class Matiere extends Model
         'libelle_en' => 'required'
     ];
 
-    
+    public function otherProgramme($req){
+        $r = 'SELECT * FROM matieres 
+                WHERE matieres.deleted_at IS NULL
+                AND matieres.id NOT IN ( 
+                    SELECT matiere_id FROM matiere_programmers
+                    WHERE matiere_programmers.deleted_at IS NULL
+                    AND matiere_programmers.annee_academique_id = '.$req->idanne.' 
+                    AND matiere_programmers.groupe_matiere_id = '.$req->idgroupe.' 
+                    AND matiere_programmers.serie_id = '.$req->idserie.' )';
+        return DB::select($r);;
+    }
 }

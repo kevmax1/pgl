@@ -46,8 +46,7 @@ class AnneeAcademique extends Model
     public static $rules = [
         'libelle' => 'required',
         'date_debut' => 'required',
-        'date_fin' => 'required',
-        'encours' => 'required'
+        'date_fin' => 'required'
     ];
 
     

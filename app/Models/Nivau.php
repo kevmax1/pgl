@@ -48,5 +48,8 @@ class Nivau extends Model
         'cycle_id' => 'required'
     ];
 
+    public function cycle(){
+        return $this->belongsTo('\App\Models\Cycle');
+    }
     
 }

@@ -162,7 +162,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        browner12\helpers\HelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -182,8 +183,8 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
-        \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class, 
-
+        \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
+        ZanySoft\LaravelPDF\PdfServiceProvider::class,
     ],
 
     /*
@@ -237,7 +238,8 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
-
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'PDF' => ZanySoft\LaravelPDF\Facades\PDF::class
     ],
 
 ];
