@@ -1,48 +1,29 @@
-<!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $eleve->id !!}</p>
-</div>
-
 <!-- Matricule Field -->
 <div class="form-group">
     {!! Form::label('matricule', 'Matricule:') !!}
-    <p>{!! $eleve->matricule !!}</p>
+    <p><strong>{!! $eleve->matricule !!}</strong></p>
 </div>
 
 <!-- Nom Field -->
 <div class="form-group">
     {!! Form::label('nom', 'Nom:') !!}
-    <p>{!! $eleve->nom !!}</p>
+    <p><strong>{!! $eleve->nom !!}</strong></p>
 </div>
 
 <!-- Prenom Field -->
 <div class="form-group">
     {!! Form::label('prenom', 'Prenom:') !!}
-    <p>{!! $eleve->prenom !!}</p>
+    <p><strong>{!! $eleve->prenom !!}</strong></p>
 </div>
 
 <!-- Sexe Field -->
 <div class="form-group">
     {!! Form::label('sexe', 'Sexe:') !!}
-    <p>{!! $eleve->sexe !!}</p>
+    <p><strong>{!! $eleve->sexe->libelle_fr !!}</strong></p>
 </div>
 
 <!-- Date Naissance Field -->
 <div class="form-group">
-    {!! Form::label('date_naissance', 'Date Naissance:') !!}
-    <p>{!! $eleve->date_naissance !!}</p>
+    {!! Form::label('date_naissance', 'Date de Naissance:') !!}
+    <p><strong>{!! Carbon\Carbon::parse($eleve->date_naissance)->format('d-m-Y') !!}</strong></p>
 </div>
-
-<!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $eleve->created_at !!}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $eleve->updated_at !!}</p>
-</div>
-

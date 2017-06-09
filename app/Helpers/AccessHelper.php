@@ -18,7 +18,7 @@ if (!function_exists('DummyFunction')) {
 
 if (!function_exists('myAccess')) {
     function myAccess(){
-    	return Auth::user()->role->access;
+    	return Auth::user()->role->access()->orderBy('menu_id','asc')->get();
     }
 }
 if (!function_exists('myModuleAccess')) {

@@ -14,6 +14,7 @@
 
 Auth::routes();
 
+Route::get('/setLang','UTilities\LangueController@setLocale')->name('change.locale');
 
 Route::get('/contact_admin', function () {
 	    return view('contact_admin');
@@ -21,9 +22,7 @@ Route::get('/contact_admin', function () {
 Route::post('/contact_admin', 'HomeController@contact_admin');
 
 Route::group(['middleware' => ['auth']], function(){
-	Route::get('/', function () {
-	    return view('home');
-	});
+	Route::get('/','HomeController@index')->name('home');
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::resource('roles', 'roleController');
 
@@ -38,6 +37,80 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('matiereProgrammers/add_chap','ChapitreController@add_chap')->name('matiereProgrammers.add_chap');
 	Route::post('matiereProgrammers/edit_order','ChapitreController@edit_order')->name('matiereProgrammers.edit_order');
 	Route::post('matiereProgrammers/delete_chapitre','ChapitreController@delete_chapitre')->name('matiereProgrammers.delete_chapitre');
+});
+
+    Route::resource('acces', 'accesController');
+
+    Route::resource('sections', 'sectionController');
+
+    Route::resource('cycles', 'CycleController');
+
+    Route::resource('niveaux', 'NivauController');
+
+    Route::resource('series', 'SerieController');
+    Route::get('series/find','SerieController@find')->name('series.find');
+    Route::get('series/find/{id}','SerieController@find')->name('series.find2');
+
+    Route::resource('programmes', 'ProgrammeController');
+
+    Route::resource('matieres', 'MatiereController');
+
+    Route::resource('groupeMatieres', 'GroupeMatiereController');
+
+    Route::resource('anneeAcademiques', 'AnneeAcademiqueController');
+
+
+
+    Route::resource('classes', 'ClasseController');
+
+    Route::get('classes/find','ClasseController@find')->name('classes.find');
+    Route::get('classes/find/{id}','ClasseController@find')->name('classes.find2');
+
+    Route::resource('matiereProgrammers', 'MatiereProgrammerController');
+
+    Route::resource('enseignants', 'EnseignantController');
+
+    Route::resource('affectations', 'AffectationController');
+
+    Route::resource('chapitres', 'ChapitreController');
+
+    Route::resource('grandTitres', 'GrandTitreController');
+
+    Route::resource('titres', 'TitreController');
+
+    Route::resource('trimestres', 'TrimestreController');
+
+    Route::resource('sequences', 'SequenceController');
+
+    Route::resource('evaluations', 'EvaluationController');
+
+    Route::resource('villes', 'VilleController');
+
+    Route::resource('etablissements', 'EtablissementController');
+
+    Route::resource('jours', 'JourController');
+
+    Route::resource('plageHoraires', 'PlageHoraireController');
+
+    Route::resource('planings', 'PlaningController');
+    Route::get('eleves/find','EleveController@find')->name('eleves.find');
+    Route::get('eleves/find/{id}','EleveController@find')->name('eleves.find2');
+    Route::get('eleves/affecter/','EleveController@affecter')->name('eleves.affecter');
+    Route::post('eleves/affecter/','EleveController@affecterStore')->name('eleves.affecter.Store');
+    Route::post('eleves/index/find','EleveController@findIndex')->name('eleves.index.find');
+    Route::resource('eleves', 'EleveController');
+
+    Route::resource('parents', 'ParentController');
+
+    Route::resource('compositions', 'CompositionController');
+
+    Route::resource('inscriptions', 'InscriptionController');
+
+    Route::resource('seanceCours', 'SeanceCourController');
+
+    Route::resource('presences', 'PresenceController');
+
+
 });
 
 
@@ -61,78 +134,3 @@ Route::group(['middleware' => ['auth']], function(){
 // Route::get('password/reset','App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 // Route::post('password/reset','App\Http\Controllers\Auth\ResetPasswordController@reset');
 // Route::get('password/reset/{token}','App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
-
-
-
-
-
-
-Route::resource('acces', 'accesController');
-
-Route::resource('sections', 'sectionController');
-
-Route::resource('cycles', 'CycleController');
-
-Route::resource('niveaux', 'NivauController');
-
-Route::resource('series', 'SerieController');
-Route::get('series/find','SerieController@find')->name('series.find');
-Route::get('series/find/{id}','SerieController@find')->name('series.find2');
-
-Route::resource('programmes', 'ProgrammeController');
-
-Route::resource('matieres', 'MatiereController');
-
-Route::resource('groupeMatieres', 'GroupeMatiereController');
-
-Route::resource('anneeAcademiques', 'AnneeAcademiqueController');
-
-
-
-Route::resource('classes', 'ClasseController');
-
-Route::get('classes/find','ClasseController@find')->name('classes.find');
-Route::get('classes/find/{id}','ClasseController@find')->name('classes.find2');
-
-Route::resource('matiereProgrammers', 'MatiereProgrammerController');
-
-Route::resource('enseignants', 'EnseignantController');
-
-Route::resource('affectations', 'AffectationController');
-
-Route::resource('chapitres', 'ChapitreController');
-
-Route::resource('grandTitres', 'GrandTitreController');
-
-Route::resource('titres', 'TitreController');
-
-Route::resource('trimestres', 'TrimestreController');
-
-Route::resource('sequences', 'SequenceController');
-
-Route::resource('evaluations', 'EvaluationController');
-
-Route::resource('villes', 'VilleController');
-
-Route::resource('etablissements', 'EtablissementController');
-
-Route::resource('jours', 'JourController');
-
-Route::resource('plageHoraires', 'PlageHoraireController');
-
-Route::resource('planings', 'PlaningController');
-
-
-
-Route::resource('eleves', 'EleveController');
-
-Route::resource('parents', 'ParentController');
-
-Route::resource('compositions', 'CompositionController');
-
-Route::resource('inscriptions', 'InscriptionController');
-
-Route::resource('seanceCours', 'SeanceCourController');
-
-Route::resource('presences', 'PresenceController');
-

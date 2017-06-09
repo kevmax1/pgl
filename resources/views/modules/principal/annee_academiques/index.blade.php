@@ -1,21 +1,38 @@
 @extends('layouts.app')
-
+@section('page-head')
+    <div class="page-head">
+        <h2 class="page-head-title">@lang('annee_academique.name')</h2>
+        <ol class="breadcrumb page-head-nav">
+            <li><a href="#">@lang('common.module_principal')</a></li>
+            <li><a href="#">@lang('annee_academique.name')</a></li>
+            <li class="active">@lang('common.lister')</li>
+        </ol>
+    </div>
+@endsection
 @section('content')
-    <section class="content-header">
-        <h1 class="pull-left">Annee Academiques</h1>
-        <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('anneeAcademiques.create') !!}">Add New</a>
-        </h1>
-    </section>
-    <div class="content">
-        <div class="clearfix"></div>
-
-        @include('flash::message')
-
-        <div class="clearfix"></div>
-        <div class="box box-primary">
-            <div class="box-body">
-                @include('modules.principal.annee_academiques.table')
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default panel-border-color panel-border-color-primary">
+                <div class="panel-heading panel-heading-divider">@lang('annee_academique.add')</div>
+                <div class="panel-body">
+                    {!! Form::open(['route' => 'anneeAcademiques.store']) !!}
+                    @include('modules.principal.annee_academiques.fields')
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default panel-border-color panel-border-color-primary">
+                <div class="panel-heading panel-heading-divider">@lang('annee_academique.list')<span class="panel-subtitle"></span></div>
+                <div class="panel-body">
+                    @include('flash::message')
+                    <div class="clearfix"></div>
+                    <div class="box box-primary">
+                        <div class="box-body" id="data">
+                            @include('modules.principal.annee_academiques.table')
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

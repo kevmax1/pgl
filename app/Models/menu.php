@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\menu;
+use Illuminate\Support\Facades\Session;
+
 /**
  * Class menu
  * @package App\Models
@@ -64,6 +65,15 @@ class menu extends Model
 
     public function fils(){
         return menu::where('parent_id', $this->id)->get();
+    }
+
+    public function getLibelleAttribute($value)
+    {
+        $lang = (Session::get('lang')!=null)?Session::get('lang'):'fr';
+        if ($lang == 'en')
+            return $this->libelle_en;
+        else
+            return $value;
     }
 
 }

@@ -1,32 +1,19 @@
-<!-- Libelle Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('libelle', 'Libelle:') !!}
+<div class="form-group xs-pt-10">
+    {!! Form::label('libelle', __('annee_academique.libelle')) !!}
     {!! Form::text('libelle', null, ['class' => 'form-control']) !!}
 </div>
-
-<!-- Date Debut Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('date_debut', 'Date Debut:') !!}
-    {!! Form::date('date_debut', null, ['class' => 'form-control']) !!}
+<div class="form-group xs-pt-10">
+    {!! Form::label('date_debut', __('annee_academique.start')) !!}
+    {!! Form::date('date_debut', isset($anneeAcademique) ? $anneeAcademique->date_debut :null, ['class' => 'form-control']) !!}
 </div>
-
-<!-- Date Fin Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('date_fin', 'Date Fin:') !!}
-    {!! Form::date('date_fin', null, ['class' => 'form-control']) !!}
+<div class="form-group xs-pt-10">
+    {!! Form::label('date_fin', __('annee_academique.end')) !!}
+    {!! Form::date('date_fin', isset($anneeAcademique) ? $anneeAcademique->date_fin :null, ['class' => 'form-control']) !!}
 </div>
-
-<!-- Encours Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('encours', 'Encours:') !!}
-	<div>
-		<input type="radio" name="encours" value="1">True
-		<input type="radio" name="encours" value="0">Fase
+<div class="row xs-pt-15">
+	<div class="col-xs-6 col-xs-offset-3">
+		<p class="text-center">
+            {!! Form::submit(__('common.save'), ['class' => 'btn btn-primary']) !!}
+		</p>
 	</div>
-</div>
-
-<!-- Submit Field -->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('anneeAcademiques.index') !!}" class="btn btn-default">Cancel</a>
 </div>
