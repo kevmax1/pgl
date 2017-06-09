@@ -13,7 +13,7 @@
                <div class="row">
                    {!! Form::model($matiereProgrammer, ['route' => ['matiereProgrammers.update', $matiereProgrammer->id], 'method' => 'patch']) !!}
 
-                        @include('matiere_programmers.fields')
+                        @include('modules.principal.matiere_programmers.fields')
 
                    {!! Form::close() !!}
                </div>

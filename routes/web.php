@@ -29,6 +29,15 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::get('modules/{id}','moduleController@set')->name('modules.set');
 	Route::resource('menus', 'menuController');
+	Route::post('matiereProgrammers/matiere','MatiereProgrammerController@matiere')->name('matiereProgrammers.matieres');
+	Route::post('matiereProgrammers/matiere2','MatiereProgrammerController@matiere2')->name('matiereProgrammers.matieres2');
+	Route::post('matiereProgrammers/save','MatiereProgrammerController@save')->name('matiereProgrammers.save');
+	Route::post('matiereProgrammers/delete','MatiereProgrammerController@delete')->name('matiereProgrammers.delete');
+	Route::post('matiereProgrammers/get_all','MatiereProgrammerController@get_all')->name('matiereProgrammers.get_all');
+	Route::post('matiereProgrammers/chapitre','ChapitreController@chapitre')->name('matiereProgrammers.chapitre');
+	Route::post('matiereProgrammers/add_chap','ChapitreController@add_chap')->name('matiereProgrammers.add_chap');
+	Route::post('matiereProgrammers/edit_order','ChapitreController@edit_order')->name('matiereProgrammers.edit_order');
+	Route::post('matiereProgrammers/delete_chapitre','ChapitreController@delete_chapitre')->name('matiereProgrammers.delete_chapitre');
 });
 
 

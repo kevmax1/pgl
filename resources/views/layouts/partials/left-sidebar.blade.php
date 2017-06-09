@@ -69,7 +69,7 @@
                   <a href="{{ $access->menu->route }}">
                       <i class="{{ $access->menu->icon }}"></i>
                       <span>{{ $access->menu->libelle }}</span>
-                      <span class="fa arrow"></span>
+                      @if( count($access->menu->fils()) > 0 )<span class="fa arrow"></span>@endif
                   </a>
                   @if( count($access->menu->fils()) > 0 )
                   <ul class="sub-menu" >

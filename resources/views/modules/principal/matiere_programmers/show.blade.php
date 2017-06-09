@@ -10,7 +10,7 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
-                    @include('matiere_programmers.show_fields')
+                    @include('modules.principal.matiere_programmers.show_fields')
                     <a href="{!! route('matiereProgrammers.index') !!}" class="btn btn-default">Back</a>
                 </div>
             </div>

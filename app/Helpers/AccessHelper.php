@@ -1,5 +1,6 @@
 <?php
 use App\Models\menu;
+use App\Models\Chapitre;
 
 if (!function_exists('DummyFunction')) {
 
