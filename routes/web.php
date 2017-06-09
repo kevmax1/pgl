@@ -37,8 +37,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('matiereProgrammers/add_chap','ChapitreController@add_chap')->name('matiereProgrammers.add_chap');
 	Route::post('matiereProgrammers/edit_order','ChapitreController@edit_order')->name('matiereProgrammers.edit_order');
 	Route::post('matiereProgrammers/delete_chapitre','ChapitreController@delete_chapitre')->name('matiereProgrammers.delete_chapitre');
-});
-
+	
     Route::resource('acces', 'accesController');
 
     Route::resource('sections', 'sectionController');
