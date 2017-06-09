@@ -183,8 +183,8 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
-        \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class, 
-
+        \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
+        ZanySoft\LaravelPDF\PdfServiceProvider::class,
     ],
 
     /*
@@ -239,6 +239,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'PDF' => ZanySoft\LaravelPDF\Facades\PDF::class
     ],
 
 ];
