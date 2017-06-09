@@ -14,7 +14,7 @@
                 <div class="row">
                     {!! Form::open(['route' => 'matiereProgrammers.store']) !!}
 
-                        @include('matiere_programmers.fields')
+                        @include('modules.principal.matiere_programmers.fields')
 
                     {!! Form::close() !!}
                 </div>
