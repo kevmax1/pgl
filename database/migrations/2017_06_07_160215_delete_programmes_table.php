@@ -13,8 +13,11 @@ class DeleteProgrammesTable extends Migration
      */
     public function up()
     {
-        //Schema::dropIfExists('programmes');
-        //
+         Schema::table('matiere_programmers', function (Blueprint $table) {
+             $table->dropForeign('matiere_programmers_programme_id_foreign');
+         });
+         Schema::dropIfExists('programmes');
+
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Requests\CreateMatiereProgrammerRequest;
 use App\Http\Requests\UpdateMatiereProgrammerRequest;
 use App\Repositories\MatiereProgrammerRepository;
 use App\Http\Controllers\AppBaseController;
+use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
